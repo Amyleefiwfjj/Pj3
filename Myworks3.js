@@ -1,5 +1,6 @@
 let circles = []; // 원들을 저장할 배열
 let pointerCircle; // 마우스 포인터 효과를 위한 원
+let scrollCount = 0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -30,6 +31,13 @@ function mousePressed() {
     let col = color(random(255), random(255), random(255));
     let newCircle = new Circle(mouseX, mouseY, col);
     circles.push(newCircle); // 새로운 원을 circles 배열에 추가
+
+    // 클릭 횟수가 10을 초과하면 원들을 모두 제거하고 contact-info 보이기
+    if (clickCount > 10) {
+        circles = []; // 모든 원을 제거
+        document.getElementById('contact-info').style.display = 'block'; // contact-info 보이기
+    }
+    clickCount++;
 }
 
 // 원 클래스
@@ -91,6 +99,7 @@ function mouseMoved() {
     let col = color(map(mouseX, 0, width, 0, 255), map(mouseY, 0, height, 0, 255), 255);
     pointerCircle.color = col; // 마우스 위치에 따라 원 색상 변경
 }
+
 function keyPressed() {
     if (key === '1') {
         // 키 '1'을 눌러서 원의 크기와 속도를 변화시킬 수 있음
@@ -101,6 +110,7 @@ function keyPressed() {
         }
     }
 }
+
 window.addEventListener('load', function () {
     // 로딩 화면 숨기기
     const loadingScreen = document.getElementById('loading-screen');
@@ -110,3 +120,14 @@ window.addEventListener('load', function () {
     loadingScreen.style.display = 'none';
     content.style.display = 'block';
 });
+function mouseWheel(event) {
+    scrollCount += Math.sign(event.delta);
+
+    // 스크롤 카운트가 ±5 이상이면
+    if (Math.abs(scrollCount) >= 5) {
+
+        window.location.href = "Myworks4.html";
+
+    }
+
+}

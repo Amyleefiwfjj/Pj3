@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> <!-- p5.js 라이브러리 추가 -->
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0f0f0f;
+            /* 기본 배경 색 */
+            color: white;
+            overflow: hidden;
+        }
+
+        /* 배경 이미지 추가 */
+        body {
+            background-image: url('/mnt/data/image.png');
+            /* 업로드한 이미지를 배경으로 설정 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Contact 정보 영역 */
+        #contact-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            z-index: 2;
+            margin-top: 50px;
+        }
+
+        #contact-info {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        /* Contact 폼 스타일 */
+        #contact-form {
+            position: absolute;
+            top: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* 배경 색에 투명도 추가 */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+
+        input,
+        button,
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        button:hover {
+            border-color: #007BFF;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        /* 작은 화면 (모바일)에서의 반응형 디자인 */
+        @media (max-width: 768px) {
+            #contact-container {
+                font-size: 30px;
+            }
+
+            #contact-info {
+                font-size: 16px;
+            }
+
+            #contact-form {
+                padding: 20px;
+                width: 90%;
+            }
+
+            input,
+            textarea,
+            button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Contact Page Container -->
+    <div id="contact-container">
+        <h1 id="contact-text">Contact</h1>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div id="contact-info">
+        <h2>Contact Information</h2>
+        <p>Email: example@email.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Address: 123 Some Street, Some City</p>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div id="contact-form">
+        <input id="name" type="text" placeholder="Your Name">
+        <input id="email" type="email" placeholder="Your Email">
+        <textarea id="message" placeholder="Your Message" rows="4"></textarea>
+        <button onclick="submitForm()">Send Message</button>
+    </div>
+
+    <script src="Contact.js"></script> <!-- p5.js 애니메이션 스크립트 -->
+</body>
+
+</html>

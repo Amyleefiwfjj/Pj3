@@ -104,3 +104,14 @@ html {
   /* 화면 전체를 1번 섹션으로 */
   overflow: hidden;
 }
+
+#AboutmeContainer {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  z-index: 100;
+}
