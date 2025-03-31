@@ -1,66 +1,43 @@
-let points = [];
-let lines = [];
-let plane = [];
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
-  // Create a set of points
-  for (let i = 0; i < 100; i++) {
-    points.push(createVector(random(width), random(height)));
-  }
 }
 
 function draw() {
-  background(255);
-  
-  let scrollAmount = map(scrollY, 0, height, 0, 1);
-  
-  // Animate points based on scroll
-  for (let i = 0; i < points.length; i++) {
-    let p = points[i];
-    p.x += sin(scrollAmount * TWO_PI + i) * 2;
-    p.y += cos(scrollAmount * TWO_PI + i) * 2;
-    ellipse(p.x, p.y, 5, 5);
-  }
-  
-  // Draw lines when the scroll reaches a threshold
-  if (scrollAmount > 0.5) {
-    for (let i = 0; i < points.length - 1; i++) {
-      for (let j = i + 1; j < points.length; j++) {
-        let d = dist(points[i].x, points[i].y, points[j].x, points[j].y);
-        if (d < 100) {
-          lines.push([points[i], points[j]]);
-          line(points[i].x, points[i].y, points[j].x, points[j].y);
-        }
-      }
-    }
-  }
-  
-  // Create a plane when scroll reaches another threshold
-  if (scrollAmount > 0.8) {
-    for (let i = 0; i < lines.length - 1; i++) {
-      for (let j = i + 1; j < lines.length; j++) {
-        let p1 = lines[i][0];
-        let p2 = lines[i][1];
-        let p3 = lines[j][0];
-        plane.push([p1, p2, p3]);
-        triangle(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+  background(255); randomSeed(0);
+
+  let x, y, r;
+  let delta = 50;
+  let n1 = int(random(0, 255));
+  let n2 = int(random(0, 255));
+  let n3 = int(random(0, 255));
+  let n4 = int(random(0, 255));
+
+  let backSlashProb = map(mouseX, 0, windowWidth, 0, 1);
+  let backSlashThickness = map(mouseY, 0, windowHeight, 3, 30);
+
+  for (y = 0; y < windowHeight; y += delta) {
+    for (x = 0; x < windowWidth; x += delta) {
+      r = random(0, 1);
+      if (r < backSlashProb) {
+        stroke(n1, n2, n3, n4); strokeWeight(backSlashThickness); line(x, y, x + delta, y + delta);
+      } else {
+        stroke(255 - n1, 255 - n2, 255 - 3); strokeWeight(1);
+        line(x + delta, y, x, y + delta);
       }
     }
   }
 }
 
-// Scroll-based logic
-function scrollY() {
-  return window.scrollY;
+function onmouseenter() {
+
 }
-window.addEventListener('load', function() {
-    // 로딩 화면 숨기기
-    const loadingScreen = document.getElementById('loading-screen');
-    const content = document.getElementById('content');
-  
-    // 로딩 화면을 숨기고 콘텐츠를 표시
-    loadingScreen.style.display = 'none';
-    content.style.display = 'block';
-  });
+
+window.addEventListener('load', function () {
+  // 로딩 화면 숨기기
+  const loadingScreen = document.getElementById('loading-screen');
+  const content = document.getElementById('content');
+
+  // 로딩 화면을 숨기고 콘텐츠를 표시
+  loadingScreen.style.display = 'none';
+  content.style.display = 'block';
+});
