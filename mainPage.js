@@ -42,11 +42,6 @@ function mouseWheel(event) {
 
   // 스크롤 카운트가 ±5 이상이면
   if (Math.abs(scrollCount) >= 5) {
-    if (typeof addNewElements === 'function') {
-      addNewElements();  // 새 요소 추가
-    } else {
-      console.error("addNewElements function is not defined!");
-    }
 
     // 페이지 이동
     setTimeout(() => {
