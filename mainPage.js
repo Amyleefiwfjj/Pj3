@@ -22,17 +22,45 @@ function draw() {
     image(images[i], currentX, y + i *60,2700,60); 
   }
 }
+window.addEventListener('load', function() {
+  // 로딩 화면 숨기기
+  const loadingScreen = document.getElementById('loading-screen');
+  const content = document.getElementById('content');
+
+  // 로딩 화면을 숨기고 콘텐츠를 표시
+  loadingScreen.style.display = 'none';
+  content.style.display = 'block';
+});
+
 function addNewElements() {
-  // 새 요소를 동적으로 추가 (HTML에 추가)
-  const newDiv = createDiv();  // p5.js에서 HTML div 요소 생성
-  newDiv.child(createP('새로운 텍스트 요소입니다!'));  // 새 텍스트 요소
-  newDiv.child(createButton('새로운 버튼'));  // 새 버튼 요소
+  console.log("Adding new elements...");
+  // Add your code for adding elements here
+}
 
-  // 버튼 클릭 시 알림창 표시
-  newDiv.elt.querySelector('button').addEventListener('click', () => {
-    alert('새로운 버튼 클릭!');
-  });
+function mouseWheel(event) {
+  scrollCount += Math.sign(event.delta);  // event.delta is negative for scrolling up and positive for scrolling down
 
-  // 새로운 요소들을 캔버스 아래에 배치
-  newDiv.position(0, height + 20);  // 캔버스 아래에 배치
+  if (Math.abs(scrollCount) >= 5) {
+    // Ensure that addNewElements function is defined
+    if (typeof addNewElements === 'function') {
+      addNewElements();  // Call the function to add new elements
+    } else {
+      console.error("addNewElements function is not defined!");
+    }
+    
+    scrollCount = 0;   // Reset the scroll count
+  }
+
+  if (scrollCount >= 0) {
+    for (let i = 0; i < images.length; i++) {
+      deltaX[i] -= event.delta * 0.15 * (i + 1); 
+    }
+  }
+
+  // Navigation logic
+  if (Math.abs(scrollCount) >= 5) {
+    setTimeout(() => {
+      window.location.href = "Myworks.html";  // Navigate to Myworks.html after a delay
+    }, 500);  // 500 ms delay
+  }
 }
